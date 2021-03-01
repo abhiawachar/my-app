@@ -8,11 +8,4 @@ node{
   def mvnHome = tool name: 'maven-3', type: 'maven'
   sh "${mvnHome}/bin/mvn package"
   }
-  stage ('Upload war to nexus')
-  {
-  steps
-  {
-  nexusArtifactUploader artifacts: [[artifactId: 'poi', classifier: '', file: 'target/my-app-0.0.12.war', type: 'war']], credentialsId: 'nexus-user-credentials', groupId: 'in.javahome', nexusUrl: 'heeng-aawachar.headquarters.healthedge.com:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'http://heeng-aawachar.headquarters.healthedge.com:8081/repository/maven-nexus-repo/', version: '0.0.12'
   }
-  }
-}
