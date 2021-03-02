@@ -8,18 +8,4 @@ node{
   def mvnHome = tool name: 'maven-3', type: 'maven'
   sh "${mvnHome}/bin/mvn package"
   }
-  stage("Nexus Deploy"){
-            steps{
-                script{
-                    def pomFile = readMavenPom file: 'pom.xml'
-                    nexusArtifactUploader artifacts: [[artifactId: 'myweb', classifier: '', file: "target/myweb-${pomFile.version}.war", type: 'war']], 
-                                      credentialsId: 'nexus3', 
-                                      groupId: 'in.javahome', 
-                                      nexusUrl: 'heeng-aawachar.headquarters.healthedge.com:8081', 
-                                      nexusVersion: 'nexus3', 
-                                      protocol: 'http', repository: 'javahome-my-app', 
-                                      version: pomFile.version
-                }
-            }
-        }
-  }
+ }
